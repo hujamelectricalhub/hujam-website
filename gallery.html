@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Gallery - HUJAM</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      padding-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Project Gallery</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Recent Projects</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/400x250?text=Electrical+Installation" alt="Electrical Project">
+      <img src="https://via.placeholder.com/400x250?text=Mechanical+Assembly" alt="Mechanical Project">
+      <img src="https://via.placeholder.com/400x250?text=Civil+Renovation" alt="Civil Project">
+      <img src="https://via.placeholder.com/400x250?text=HVAC+System" alt="HVAC Project">
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 HUJAM Electrical Hub</p>
+    </div>
+  </footer>
+</body>
+</html>
