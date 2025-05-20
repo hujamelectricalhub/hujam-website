@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Project Gallery - HUJAM</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding-top: 20px;
-    }
-    .gallery img {
+    .carousel {{
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }}
+    .slide {{
+      min-width: 100%;
+      transition: transform 0.5s ease-in-out;
+    }}
+    .carousel img {{
       width: 100%;
       height: auto;
+      display: block;
       border-radius: 8px;
-      border: 2px solid #ccc;
-    }
+    }}
+    .caption {{
+      text-align: center;
+      font-size: 1rem;
+      color: #003366;
+      padding: 0.5em;
+    }}
   </style>
 </head>
 <body>
@@ -37,12 +47,14 @@
   </header>
 
   <section class="container">
-    <h2>Recent Projects</h2>
-    <div class="gallery">
-      <img src="https://via.placeholder.com/400x250?text=Electrical+Installation" alt="Electrical Project">
-      <img src="https://via.placeholder.com/400x250?text=Mechanical+Assembly" alt="Mechanical Project">
-      <img src="https://via.placeholder.com/400x250?text=Civil+Renovation" alt="Civil Project">
-      <img src="https://via.placeholder.com/400x250?text=HVAC+System" alt="HVAC Project">
+    <h2>May 2024 Projects</h2>
+    <div class="carousel" id="carousel">
+      <div class="slide"><img src="assets/images/High Voltage works, installing isolators.jpg" alt=""><p class="caption">High Voltage Works – Installing Isolators (May 2024)</p></div>
+      <div class="slide"><img src="assets/images/Control pannel troubleshooting.jpg" alt=""><p class="caption">Control Panel Troubleshooting (May 2024)</p></div>
+      <div class="slide"><img src="assets/images/Setting Up Site around Nakasero Kampala for our Trusted Client.jpg" alt=""><p class="caption">Site Setup – Nakasero Kampala (May 2024)</p></div>
+      <div class="slide"><img src="assets/images/Brainstorming on site changes on new darwing ffrom the Client.jpg" alt=""><p class="caption">On-site Brainstorming with Client (May 2024)</p></div>
+      <div class="slide"><img src="assets/images/Terminating Cables on the UPS Power distribution Board.jpg" alt=""><p class="caption">UPS Power Distribution – Cable Termination (May 2024)</p></div>
+      <div class="slide"><img src="assets/images/Electronics at its best at Hujam ElectricalHub.jpg" alt=""><p class="caption">Component Display – HUJAM Electrical Hub (May 2024)</p></div>
     </div>
   </section>
 
@@ -51,5 +63,14 @@
       <p>&copy; 2025 HUJAM Electrical Hub</p>
     </div>
   </footer>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    let index = 0;
+    setInterval(() => {{
+      index = (index + 1) % carousel.children.length;
+      carousel.style.transform = `translateX(-${{index}}00%)`;
+    }}, 3000);
+  </script>
 </body>
 </html>
