@@ -6,28 +6,44 @@
   <title>Project Gallery - HUJAM</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .carousel {{
-      display: flex;
+    .carousel-wrapper {
+      position: relative;
       overflow: hidden;
       width: 100%;
-      position: relative;
-    }}
-    .slide {{
-      min-width: 100%;
+    }
+    .carousel-track {
+      display: flex;
       transition: transform 0.5s ease-in-out;
-    }}
-    .carousel img {{
+    }
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+    .carousel img {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 8px;
-    }}
-    .caption {{
+    }
+    .caption {
       text-align: center;
       font-size: 1rem;
       color: #003366;
       padding: 0.5em;
-    }}
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
   </style>
 </head>
 <body>
@@ -48,13 +64,17 @@
 
   <section class="container">
     <h2>May 2024 Projects</h2>
-    <div class="carousel" id="carousel">
-      <div class="slide"><img src="assets/images/High Voltage works, installing isolators.jpg" alt=""><p class="caption">High Voltage Works ñ Installing Isolators (May 2024)</p></div>
-      <div class="slide"><img src="assets/images/Control pannel troubleshooting.jpg" alt=""><p class="caption">Control Panel Troubleshooting (May 2024)</p></div>
-      <div class="slide"><img src="assets/images/Setting Up Site around Nakasero Kampala for our Trusted Client.jpg" alt=""><p class="caption">Site Setup ñ Nakasero Kampala (May 2024)</p></div>
-      <div class="slide"><img src="assets/images/Brainstorming on site changes on new darwing ffrom the Client.jpg" alt=""><p class="caption">On-site Brainstorming with Client (May 2024)</p></div>
-      <div class="slide"><img src="assets/images/Terminating Cables on the UPS Power distribution Board.jpg" alt=""><p class="caption">UPS Power Distribution ñ Cable Termination (May 2024)</p></div>
-      <div class="slide"><img src="assets/images/Electronics at its best at Hujam ElectricalHub.jpg" alt=""><p class="caption">Component Display ñ HUJAM Electrical Hub (May 2024)</p></div>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">‚ùÆ</button>
+      <div class="carousel-track" id="carousel-track">
+        <div class="slide"><img src="assets/images/High Voltage works, installing isolators.jpg" alt=""><p class="caption">High Voltage Works ‚Äì Installing Isolators (May 2024)</p></div>
+        <div class="slide"><img src="assets/images/Control pannel troubleshooting.jpg" alt=""><p class="caption">Control Panel Troubleshooting (May 2024)</p></div>
+        <div class="slide"><img src="assets/images/Setting Up Site around Nakasero Kampala for our Trusted Client.jpg" alt=""><p class="caption">Site Setup ‚Äì Nakasero Kampala (May 2024)</p></div>
+        <div class="slide"><img src="assets/images/Brainstorming on site changes on new darwing ffrom the Client.jpg" alt=""><p class="caption">On-site Brainstorming with Client (May 2024)</p></div>
+        <div class="slide"><img src="assets/images/Terminating Cables on the UPS Power distribution Board.jpg" alt=""><p class="caption">UPS Power Distribution ‚Äì Cable Termination (May 2024)</p></div>
+        <div class="slide"><img src="assets/images/Electronics at its best at Hujam ElectricalHub.jpg" alt=""><p class="caption">Component Display ‚Äì HUJAM Electrical Hub (May 2024)</p></div>
+      </div>
+      <button class="carousel-btn next-btn" onclick="moveSlide(1)">‚ùØ</button>
     </div>
   </section>
 
@@ -65,12 +85,23 @@
   </footer>
 
   <script>
-    const carousel = document.getElementById('carousel');
+    const track = document.getElementById('carousel-track');
+    const slides = track.children;
     let index = 0;
-    setInterval(() => {{
-      index = (index + 1) % carousel.children.length;
-      carousel.style.transform = `translateX(-${{index}}00%)`;
-    }}, 3000);
+    const total = slides.length;
+
+    function updateSlidePosition() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function moveSlide(step) {
+      index = (index + step + total) % total;
+      updateSlidePosition();
+    }
+
+    setInterval(() => {
+      moveSlide(1);
+    }, 3000);
   </script>
 </body>
 </html>
