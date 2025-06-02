@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Image Gallery</title>
+ <style>
+ .gallery-container {
+ width: 100%;
+ overflow: hidden;
+ }
+
+ .gallery-wrapper {
+ display: flex;
+ transition: transform 0.5s ease-in-out;
+ }
+
+ .slide {
+ min-width: 100%;
+ box-sizing: border-box;
+ padding: 10px;
+ text-align: center;
+ }
+
+ .slide img {
+ max-width: 80%;
+ height: auto;
+ display: block;
+ margin: 0 auto 10px;
+ border: 1px solid #ccc;
+ }
+
+ .controls {
+ text-align: center;
+ margin-top: 10px;
+ }
+
+ .controls button {
+ padding: 8px 15px;
+ margin: 0 5px;
+ cursor: pointer;
+ }
+
+ .caption {
+ font-size: 0.9em;
+ color: #555;
+ }
+ </style>
+</head>
+<body>
+ <div class="gallery-container">
+ <div class="gallery-wrapper">
+ <div class="slide">
+ <img src="image1.jpg" alt="Workers discussing plans">
+ <p class="caption">Three workers in red and blue overalls looking at a document, one with a 'Wow' speech bubble.</p>
+ </div>
+ <div class="slide">
+ <img src="image2.jpg" alt="Electrical testing">
+ <p class="caption">A person using a multimeter to test electrical components in a control panel.</p>
+ </div>
+ <div class="slide">
+ <img src="image3.jpg" alt="Electrical control panel">
+ <p class="caption">A well-organized electrical control panel with various circuit breakers, contactors, and buttons.</p>
+ </div>
+ <div class="slide">
+ <img src="image4.jpg" alt="Linemen working on a pole">
+ <p class="caption">Three linemen working on a utility pole with power lines, using ladders for access.</p>
+ </div>
+ <div class="slide">
+ <img src="image5.jpg" alt="Ceiling installation">
+ <p class="caption">Workers installing a suspended ceiling with lighting fixtures in a commercial space.</p>
+ </div>
+ <div class="slide">
+ <img src="image6.jpg" alt="Electrician working on a box">
+ <p class="caption">An electrician in a red and blue uniform working on electrical wiring inside a wall-mounted box.</p>
+ </div>
+ </div>
+ <div class="controls">
+ <button onclick="prevSlide()">Previous</button>
+ <button onclick="nextSlide()">Next</button>
+ </div>
+ </div>
+
+ <script>
+ const wrapper = document.querySelector('.gallery-wrapper');
+ const slides = document.querySelectorAll('.slide');
+ const prevButton = document.querySelector('.controls button:first-child');
+ const nextButton = document.querySelector('.controls button:last-child');
+ let counter = 0;
+ const slideWidth = slides [0].offsetWidth;
+
+ wrapper.style.transform = `translateX(${-slideWidth * counter}px)`;
+
+ function nextSlide() {
+ if (counter < slides.length - 1) {
+ counter++;
+ } else {
+ counter = 0; // Loop back to the first slide
+ }
+ wrapper.style.transform = `translateX(${-slideWidth * counter}px)`;
+ }
+
+ function prevSlide() {
+ if (counter > 0) {
+ counter--;
+ } else {
+ counter = slides.length - 1; // Loop to the last slide
+ }
+ wrapper.style.transform = `translateX(${-slideWidth * counter}px)`;
+ }
+
+ // Optional: Add auto sliding
+ // setInterval(nextSlide, 3000);
+ </script>
+</body>
+</html>

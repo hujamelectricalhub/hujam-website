@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Gallery - HUJAM</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* General body and container styles (assuming from style.css or basic setup) */
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+    header { background-color: #003366; color: white; padding: 1em 0; text-align: center; }
+    header h1 { margin: 0; }
+    nav ul { list-style: none; padding: 0; text-align: center; }
+    nav ul li { display: inline; margin: 0 10px; }
+    nav ul li a { color: white; text-decoration: none; }
+    .container { width: 90%; max-width: 1200px; margin: auto; overflow: hidden; padding: 20px 0; }
+    footer { text-align: center; padding: 1em 0; background-color: #333; color: white; margin-top: 20px;}
+
+    /* Carousel specific styles */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      background-color: #fff; /* Added background for better visibility */
+      border-radius: 8px; /* Added border-radius */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Added subtle shadow */
+      margin-top: 20px; /* Added margin for spacing */
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+    .carousel img {
+      width: 100%; /* Make image take full width of the slide */
+      max-height: 500px; /* Max height to avoid overly tall images */
+      object-fit: cover; /* Cover the area, might crop */
+      display: block;
+      border-radius: 8px 8px 0 0; /* Rounded corners only at the top of the image */
+    }
+    .caption {
+      text-align: center;
+      font-size: 1rem;
+      color: #003366;
+      padding: 1em; /* Increased padding */
+      background-color: #f9f9f9; /* Light background for caption */
+      border-top: 1px solid #eee; /* Separator line */
+      border-radius: 0 0 8px 8px; /* Rounded corners at the bottom of caption area */
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 51, 102, 0.7); /* Using theme color with alpha */
+      color: white;
+      border: none;
+      padding: 12px 15px; /* Slightly larger buttons */
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%; /* Circular buttons */
+    }
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Project Gallery</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Our Projects</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">❮</button>
+      <div class="carousel-track" id="carousel-track">
+        <div class="slide">
+          <img src="assets/images/Control pannel troubleshooting.jpg" alt="Control Panel Troubleshooting">
+          <p class="caption">Control Panel Troubleshooting</p>
+        </div>
+        <div class="slide">
+          <img src="assets/images/Setting Up Site around Nakasero Kampala for our Trusted Client.jpg" alt="Site Setup – Nakasero Kampala">
+          <p class="caption">Site Setup – Nakasero Kampala</p>
+        </div>
+        <div class="slide">
+          <img src="assets/images/Brainstorming on site changes on new darwing ffrom the Client.jpg" alt="Brainstorming on site changes from client drawing">
+          <p class="caption">Brainstorming on site changes from client drawing</p>
+        </div>
+        <div class="slide">
+          <img src="assets/images/Electronics at its best at Hujam ElectricalHub.jpg" alt="Electronics at its best at Hujam ElectricalHub">
+          <p class="caption">Electronics at its best at Hujam ElectricalHub</p>
+        </div>
+        <div class="slide">
+          <img src="assets/images/High Voltage works, installing isolators.jpg" alt="High Voltage works, installing isolators">
+          <p class="caption">High Voltage works, installing isolators</p>
+        </div>
+        <div class="slide">
+          <img src="assets/images/Terminating Cables on the UPS Power distribution Board.jpg" alt="Terminating Cables on the UPS Power distribution Board">
+          <p class="caption">Terminating Cables on the UPS Power distribution Board</p>
+        </div>
+      </div>
+      <button class="carousel-btn next-btn" onclick="moveSlide(1)">❯</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 HUJAM Electrical Hub</p>
+    </div>
+  </footer>
+
+  <script>
+    const track = document.getElementById('carousel-track');
+    const slides = Array.from(track.children); // Ensure slides is an array
+    let index = 0;
+    const totalSlides = slides.length; // Renamed for clarity
+
+    function updateSlidePosition() {
+      // Calculate the width of a single slide
+      // This is important if slides have padding/margin that affects their offsetWidth
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function moveSlide(step) {
+      index = (index + step + totalSlides) % totalSlides;
+      updateSlidePosition();
+    }
+
+    // Call updateSlidePosition initially to set the correct starting position
+    // especially if slide widths might vary or need calculation after images load
+    window.addEventListener('load', () => {
+        updateSlidePosition(); // Adjust after everything is loaded
+    });
+    
+    // Also adjust on window resize
+    window.addEventListener('resize', updateSlidePosition);
+
+
+    // Autoplay
+    setInterval(() => {
+      moveSlide(1);
+    }, 3000); // Changes slide every 3 seconds
+  </script>
+</body>
+</html>
